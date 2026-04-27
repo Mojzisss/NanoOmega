@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/NanoOmega.iml" filepath="$PROJECT_DIR$/NanoOmega.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MikroOmega.iml" filepath="$PROJECT_DIR$/MikroOmega.iml" />
     </modules>
   </component>
 </project>
