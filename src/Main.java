@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class Main {
@@ -16,10 +18,16 @@ public class Main {
         int heightRd = rd.nextInt(100,800);
         int widthRd = rd.nextInt(100,1400);
         JButton button = new JButton("button");
+        button.addActionListener(e -> {
+            System.out.println("Klik!");
+        });
         windowMain.add(button);
+        button.setBounds(widthRd,heightRd,100,100);
         windowMain.revalidate();
-        button.setSize(100,100);
-        button.setLocation(widthRd,heightRd);
+
+
+
+
 
     }
 }
