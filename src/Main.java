@@ -1,34 +1,42 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        Start start = new Start();
+        //Start start = new Start();
         JFrame windowMain = new JFrame("mainWindow");
-        windowMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        windowMain.setSize(1500, 900);
-        windowMain.setLocationRelativeTo(null);
-        windowMain.setResizable(false);
+        windowMain.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        windowMain.setLayout(null);
         windowMain.setVisible(true);
-        System.out.println("neco");
+        windowMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Random rd = new Random();
-        int heightRd = rd.nextInt(100,800);
-        int widthRd = rd.nextInt(100,1400);
         JButton button = new JButton("button");
-        button.addActionListener(e -> {
-            System.out.println("Klik!");
-        });
+        final int[] buttonsize = {windowMain.getHeight() - 100};
+        button.setSize(buttonsize[0], buttonsize[0]);
+        button.setLocation(200, 200);
         windowMain.add(button);
-        button.setBounds(widthRd,heightRd,100,100);
-        windowMain.revalidate();
+        final int[] clicked = {0};
 
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clicked[0]++;
+                double random = rd.nextDouble(0.3, 0.8);
+                buttonsize[0] = (int) (buttonsize[0] * random);
+                int MaxWidth = windowMain.getWidth() - button.getWidth();
+                int MaxHeight = windowMain.getHeight() - button.getHeight();
 
+                int x = rd.nextInt(MaxWidth);
+                int y = rd.nextInt(MaxHeight);
 
-
+                button.setLocation(x, y);
+                button.setSize(buttonsize[0], buttonsize[0]);
+                System.out.println(clicked[0]);
+            }
+        });
 
     }
 }
