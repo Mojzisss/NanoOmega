@@ -13,6 +13,7 @@ public class Main {
         windowMain.setLocationRelativeTo(null);
         windowMain.setResizable(false);
         windowMain.setVisible(true);
+        System.out.println("neco");
 
         Random rd = new Random();
         int heightRd = rd.nextInt(100,800);
