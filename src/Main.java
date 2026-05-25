@@ -10,17 +10,18 @@ public class Main {
         windowMain.setLayout(null);
         windowMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JButton button = new JButton("🦆");
-        button.setBounds(300, 300, 500, 500);
+        JButton button = new JButton("🥔");
+        windowMain.setVisible(true);
+        button.setSize( windowMain.getHeight()-100, windowMain.getHeight()-100);
+        button.setLocation((windowMain.getWidth()-windowMain.getHeight()+100)/2,50);
+        windowMain.add(button);
 
         Random rd = new Random();
 
-        windowMain.add(button);
 
-        windowMain.setVisible(true);
 
         button.addActionListener(
-                new FindButtongame(button, windowMain, rd)
+                new FindButtongame(button, windowMain, rd, windowMain.getHeight())
         );
     }
 }
