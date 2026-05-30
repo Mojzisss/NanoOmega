@@ -1,3 +1,6 @@
+
+import games.FindButtongame;
+
 import javax.swing.*;
 
 public class Start {
@@ -9,9 +12,7 @@ public class Start {
 
         createWindow();
         createButtons();
-
         frame.setVisible(true);
-
     }
 
     private void createWindow() {
@@ -28,9 +29,7 @@ public class Start {
 
         for (int i = 0; i < buttons.length; i++) {
 
-
             buttons[i] = new JButton("Button " + (i + 1));
-
 
             int x;
             int y;
@@ -40,26 +39,34 @@ public class Start {
                 x = 300 + i * 300;
             } else {
                 y = 700;
-                x = -1200 + i * 300;
+                x = 300 + (i - 5) * 300;
             }
+
             buttons[i].setBounds(x, y, 200, 50);
 
+            buttons[0].setText("find Button");
             int index = i;
 
             buttons[i].addActionListener(e -> {
-                for (int j = 0; j < buttons.length; j++) {
-                    buttons[j].setVisible(false);
-                }
+
+                hideButtons();
 
                 switch (index) {
-
                     case 0:
-                        new games.FindButtongame(frame.getHeight(),frame.getWidth());
+                        new FindButtongame(frame);
+                        break;
 
                 }
+
             });
 
             frame.add(buttons[i]);
+        }
+    }
+
+    private void hideButtons() {
+        for (int j = 0; j < buttons.length; j++) {
+            buttons[j].setVisible(false);
         }
     }
 }
