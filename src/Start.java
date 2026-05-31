@@ -2,6 +2,7 @@
 import games.FindButtongame;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Start {
 
@@ -26,7 +27,7 @@ public class Start {
     private void createButtons() {
 
         buttons = new JButton[10];
-
+        JButton exit = new JButton("exit");
         for (int i = 0; i < buttons.length; i++) {
 
             buttons[i] = new JButton("Button " + (i + 1));
@@ -43,26 +44,39 @@ public class Start {
             }
 
             buttons[i].setBounds(x, y, 200, 50);
-
+            exit.setBounds(1700,30,120,40);
             buttons[0].setText("find Button");
             int index = i;
 
             buttons[i].addActionListener(e -> {
 
                 hideButtons();
-
+                exit.setVisible(true);
+                frame.add(exit);
                 switch (index) {
                     case 0:
                         new FindButtongame(frame);
                         break;
-
                 }
 
+            });
+            exit.addActionListener(e -> {
+
+                for (Component c : frame.getContentPane().getComponents()) {
+                    if (c instanceof JButton) {
+                        c.setVisible(false);
+                    }
+                }
+
+                for (int j = 0; j < buttons.length; j++) {
+                    buttons[j].setVisible(true);
+                }
             });
 
             frame.add(buttons[i]);
         }
     }
+
 
     private void hideButtons() {
         for (int j = 0; j < buttons.length; j++) {

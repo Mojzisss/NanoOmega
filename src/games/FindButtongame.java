@@ -27,7 +27,7 @@ public class FindButtongame {
 
             clicked++;
 
-            double random = rd.nextDouble(0.6, 0.9);
+            double random = rd.nextDouble(0.7, 0.9);
 
             buttonSize = (int) (buttonSize * random);
 
@@ -44,11 +44,6 @@ public class FindButtongame {
             button.setLocation(x, y);
 
             System.out.println("Clicks: "+ clicked);
-
-            if(buttonSize < 20){
-                JOptionPane.showMessageDialog(frame,"Vyhrál jsi!");
-                button.setVisible(false);
-            }
         });
 
         frame.add(button);
