@@ -2,7 +2,7 @@ package games;
 import javax.swing.*;
 import java.util.Random;
 
-public class FindButtongame {
+public class FindButton {
 
     private JFrame frame;
     private JButton button;
@@ -12,7 +12,7 @@ public class FindButtongame {
     private int clicked = 0;
     private int buttonSize = 1000;
 
-    public FindButtongame(JFrame frame) {
+    public FindButton(JFrame frame) {
 
         this.frame = frame;
 
@@ -32,11 +32,9 @@ public class FindButtongame {
             buttonSize = (int) (buttonSize * random);
 
             int maxWidth = frame.getWidth() - buttonSize - 50;
-
             int maxHeight = frame.getHeight() - buttonSize - 50;
 
             int x = rd.nextInt(maxWidth) + 25;
-
             int y = rd.nextInt(maxHeight) + 25;
 
             button.setSize(buttonSize, buttonSize);
@@ -49,5 +47,14 @@ public class FindButtongame {
         frame.add(button);
 
         frame.repaint();
+    }
+
+    private void checkWin() {
+
+        if (buttonSize<10) {
+            JOptionPane.showMessageDialog(
+                    frame, "you won!"
+            );
+        }
     }
 }

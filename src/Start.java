@@ -1,5 +1,7 @@
 
-import games.FindButtongame;
+import games.ButtonSplit;
+import games.CleanTheScreen;
+import games.FindButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +32,7 @@ public class Start {
         JButton exit = new JButton("exit");
         for (int i = 0; i < buttons.length; i++) {
 
-            buttons[i] = new JButton("Button " + (i + 1));
+            buttons[i] = new JButton();
 
             int x;
             int y;
@@ -45,7 +47,6 @@ public class Start {
 
             buttons[i].setBounds(x, y, 200, 50);
             exit.setBounds(1700,30,120,40);
-            buttons[0].setText("find Button");
             int index = i;
 
             buttons[i].addActionListener(e -> {
@@ -55,10 +56,17 @@ public class Start {
                 frame.add(exit);
                 switch (index) {
                     case 0:
-                        new FindButtongame(frame);
+                        new FindButton(frame);
+                        break;
+
+                    case 1:
+                        new CleanTheScreen(frame);
+                        break;
+
+                    case 2:
+                        new ButtonSplit(frame);
                         break;
                 }
-
             });
             exit.addActionListener(e -> {
 
@@ -71,10 +79,16 @@ public class Start {
                 for (int j = 0; j < buttons.length; j++) {
                     buttons[j].setVisible(true);
                 }
+
             });
+
 
             frame.add(buttons[i]);
         }
+        buttons[0].setText("find Button");
+        buttons[1].setText("clean screen");
+        buttons[2].setText("Button Split");
+        frame.repaint();
     }
 
 
