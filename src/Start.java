@@ -26,8 +26,12 @@ public class Start {
 
     private void createButtons() {
 
-        buttons = new JButton[10];
+
+        buttons = new JButton[5];
         JButton exit = new JButton("exit");
+
+
+
         for (int i = 0; i < buttons.length; i++) {
 
             buttons[i] = new JButton();
@@ -35,20 +39,15 @@ public class Start {
             int x;
             int y;
 
-            if (i < 5) {
-                y = 300;
+                y = 500;
                 x = 250 + i * 300;
-            } else {
-                y = 700;
-                x = 250 + (i - 5) * 300;
-            }
+
 
             buttons[i].setBounds(x, y, 200, 50);
             exit.setBounds(1700,30,120,40);
             int index = i;
 
             buttons[i].addActionListener(e -> {
-
                 hideButtons();
                 exit.setVisible(true);
                 frame.add(exit);
@@ -72,27 +71,6 @@ public class Start {
                     case 4:
                         new Memory(frame);
                         break;
-
-//                    case 5:
-//                        new (frame);
-//                        break;
-//
-//                    case 6:
-//                        new (frame);
-//                        break;
-//
-//                    case 7:
-//                        new (frame);
-//                        break;
-//
-//                    case 8:
-//                        new (frame);
-//                        break;
-//
-//                    case 9:
-//                        new (frame);
-//                        break;
-
                 }
             });
             exit.addActionListener(e -> {
@@ -109,7 +87,6 @@ public class Start {
 
             });
 
-
             frame.add(buttons[i]);
         }
         buttons[0].setText("find Button");
@@ -117,14 +94,8 @@ public class Start {
         buttons[2].setText("Button Split");
         buttons[3].setText("Battle");
         buttons[4].setText("Memory");
-//        buttons[5].setText("");
-//        buttons[6].setText("");
-//        buttons[7].setText("");
-//        buttons[8].setText("");
-//        buttons[9].setText("");
         frame.repaint();
     }
-
 
     private void hideButtons() {
         for (int j = 0; j < buttons.length; j++) {
@@ -132,3 +103,6 @@ public class Start {
         }
     }
 }
+
+
+
