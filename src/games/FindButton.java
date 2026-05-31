@@ -11,11 +11,11 @@ public class FindButton {
 
     private int clicked = 0;
     private int buttonSize = 1000;
+    private long startTime;
 
     public FindButton(JFrame frame) {
-
+        startTime = System.currentTimeMillis();
         this.frame = frame;
-
         createGame();
     }
 
@@ -37,23 +37,26 @@ public class FindButton {
             int x = rd.nextInt(maxWidth) + 25;
             int y = rd.nextInt(maxHeight) + 25;
 
-            button.setSize(buttonSize, buttonSize);
-
-            button.setLocation(x, y);
-
-            System.out.println("Clicks: "+ clicked);
+            button.setBounds(x,y,buttonSize,buttonSize);
+            checkWin();
         });
 
         frame.add(button);
-
         frame.repaint();
     }
 
     private void checkWin() {
 
-        if (buttonSize<10) {
+        if (buttonSize<= 1) {
+
+            long duration = System.currentTimeMillis() - startTime;
+
+            double seconds = duration / 1000.0;
+
             JOptionPane.showMessageDialog(
-                    frame, "you won!"
+                    frame,
+                    "You Win! \nin: "
+                            + String.format("%.2f", seconds) + " s"
             );
         }
     }

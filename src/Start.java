@@ -1,7 +1,5 @@
 
-import games.ButtonSplit;
-import games.CleanTheScreen;
-import games.FindButton;
+import games.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,10 +37,10 @@ public class Start {
 
             if (i < 5) {
                 y = 300;
-                x = 300 + i * 300;
+                x = 250 + i * 300;
             } else {
                 y = 700;
-                x = 300 + (i - 5) * 300;
+                x = 250 + (i - 5) * 300;
             }
 
             buttons[i].setBounds(x, y, 200, 50);
@@ -66,6 +64,35 @@ public class Start {
                     case 2:
                         new ButtonSplit(frame);
                         break;
+
+                    case 3:
+                        new Battle(frame);
+                        break;
+
+                    case 4:
+                        new Memory(frame);
+                        break;
+
+//                    case 5:
+//                        new (frame);
+//                        break;
+//
+//                    case 6:
+//                        new (frame);
+//                        break;
+//
+//                    case 7:
+//                        new (frame);
+//                        break;
+//
+//                    case 8:
+//                        new (frame);
+//                        break;
+//
+//                    case 9:
+//                        new (frame);
+//                        break;
+
                 }
             });
             exit.addActionListener(e -> {
@@ -88,6 +115,13 @@ public class Start {
         buttons[0].setText("find Button");
         buttons[1].setText("clean screen");
         buttons[2].setText("Button Split");
+        buttons[3].setText("Battle");
+        buttons[4].setText("Memory");
+//        buttons[5].setText("");
+//        buttons[6].setText("");
+//        buttons[7].setText("");
+//        buttons[8].setText("");
+//        buttons[9].setText("");
         frame.repaint();
     }
 

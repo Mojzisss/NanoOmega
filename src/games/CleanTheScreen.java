@@ -1,5 +1,7 @@
 package games;
+
 import javax.swing.*;
+import java.awt.*;
 import java.util.Random;
 
 public class CleanTheScreen {
@@ -10,6 +12,10 @@ public class CleanTheScreen {
     private int defeated = 0;
     private int buttonSize;
     private int buttonCount;
+    private long startTime;
+
+
+
 
     public CleanTheScreen(JFrame frame) {
         this.frame = frame;
@@ -17,12 +23,18 @@ public class CleanTheScreen {
     }
 
     private void createGame() {
-        buttonCount = rd.nextInt(3,100);
+        startTime = System.currentTimeMillis();
+        buttonCount = rd.nextInt(50, 100);
         buttons = new JButton[buttonCount];
 
         for (int i = 0; i < buttons.length; i++) {
+            Color randomColor = new Color(
+                    rd.nextInt(256),
+                    rd.nextInt(256),
+                    rd.nextInt(256)
+            );
             buttons[i] = new JButton();
-            buttonSize = rd.nextInt(20,1000);
+            buttonSize = rd.nextInt(50, 400);
 
             int maxWidth = frame.getWidth() - buttonSize - 50;
             int maxHeight = frame.getHeight() - buttonSize - 50;
@@ -30,7 +42,8 @@ public class CleanTheScreen {
             int x = rd.nextInt(maxWidth) + 25;
             int y = rd.nextInt(maxHeight) + 25;
 
-            buttons[i].setBounds(x,y,buttonSize,buttonSize);
+            buttons[i].setBounds(x, y, buttonSize, buttonSize);
+            buttons[i].setBackground(randomColor);
             frame.add(buttons[i]);
 
 
@@ -44,12 +57,19 @@ public class CleanTheScreen {
         }
         frame.repaint();
     }
+
     private void checkWin() {
 
-        if (defeated == buttonCount+1) {
+        if (defeated == buttonCount ) {
+
+            long duration = System.currentTimeMillis() - startTime;
+
+            double seconds = duration / 1000.0;
+
             JOptionPane.showMessageDialog(
                     frame,
-                    "you won!"
+                    "You Win! \nin: "
+                            + String.format("%.2f", seconds) + " s"
             );
         }
     }

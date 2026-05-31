@@ -11,7 +11,7 @@ public class ButtonSplit {
 
     private ArrayList<JButton> buttons = new ArrayList<>();
     private final int MIN_SIZE = 60;
-
+    private long startTime;
 
     public ButtonSplit(JFrame frame) {
         this.frame = frame;
@@ -19,7 +19,7 @@ public class ButtonSplit {
     }
 
     private void createGame() {
-
+        startTime = System.currentTimeMillis();
         JButton startButton = new JButton();
 
         int size = 400;
@@ -36,6 +36,7 @@ public class ButtonSplit {
 
         frame.add(startButton);
         frame.repaint();
+
     }
 
     private void splitButton(JButton button) {
@@ -59,7 +60,7 @@ public class ButtonSplit {
 
         for (int i = 0; i < count; i++) {
 
-            double factor = rd.nextDouble(0.6, 0.7);
+            double factor = rd.nextDouble(0.5, 0.7);
             int newSize = (int) (oldSize * factor);
 
             JButton newButton = new JButton();
@@ -88,9 +89,15 @@ public class ButtonSplit {
     private void checkWin() {
 
         if (buttons.isEmpty()) {
+
+            long duration = System.currentTimeMillis() - startTime;
+
+            double seconds = duration / 1000.0;
+
             JOptionPane.showMessageDialog(
                     frame,
-                    "you won!"
+                    "You Win! \nin: "
+                            + String.format("%.2f", seconds) + " s"
             );
         }
     }
