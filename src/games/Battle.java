@@ -48,7 +48,6 @@ public class Battle {
         JButton btn = new JButton();
         Enemy enemy = new Enemy(btn, size);
         enemy.button.setBounds(x, y, size, size);
-
         enemy.updateText();
         enemy.button.addActionListener(e -> {
 
@@ -89,6 +88,10 @@ public class Battle {
             int newSize = (int)(size * factor);
             if(newSize < MIN_SIZE){
                 continue;
+            }
+
+            if ((newSize<400)&(newSize<200)){
+
             }
 
             int maxX = frame.getWidth() - newSize - 50;
