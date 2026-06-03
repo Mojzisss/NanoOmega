@@ -9,7 +9,7 @@ public class Battle {
 
     private JFrame frame;
     private Random rd = new Random();
-
+    private int demageDealed;
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private final int MIN_SIZE = 50;
     private long startTime;
@@ -53,7 +53,7 @@ public class Battle {
         enemy.button.addActionListener(e -> {
 
             enemy.hp--;
-
+            demageDealed ++;
             if (enemy.hp <= 0) {
                 split(enemy);
             } else {
@@ -80,11 +80,11 @@ public class Battle {
             return;
         }
 
-        int children = rd.nextInt(2, 7);
+        int children = rd.nextInt(2, 6);
 
         for (int i = 0; i < children; i++) {
 
-            double factor = rd.nextDouble(0.4, 0.7);
+            double factor = rd.nextDouble(0.3, 0.6);
 
             int newSize = (int)(size * factor);
             if(newSize < MIN_SIZE){
@@ -117,7 +117,8 @@ public class Battle {
             JOptionPane.showMessageDialog(
                     frame,
                     "you won! \nin: "
-                            + String.format("%.2f", seconds) + " s"
+                            + String.format("%.2f", seconds) + " s"+
+                            "\n demage dealed: "+ demageDealed
             );
         }
     }

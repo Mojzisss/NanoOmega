@@ -40,11 +40,11 @@ public class Start {
             int y;
 
                 y = 500;
-                x = 250 + i * 300;
+                x = 150 + i * 300;
 
 
             buttons[i].setBounds(x, y, 200, 50);
-            exit.setBounds(1700,30,120,40);
+            exit.setBounds(765,50,160,40);
             int index = i;
 
             buttons[i].addActionListener(e -> {
@@ -60,7 +60,7 @@ public class Start {
                         new CleanTheScreen(frame);
                         break;
 
-                    case 2:
+                    case 4:
                         new ButtonSplit(frame);
                         break;
 
@@ -68,7 +68,7 @@ public class Start {
                         new Battle(frame);
                         break;
 
-                    case 4:
+                    case 2:
                         new Memory(frame);
                         break;
                 }
@@ -91,9 +91,9 @@ public class Start {
         }
         buttons[0].setText("find Button");
         buttons[1].setText("clean screen");
-        buttons[2].setText("Button Split");
+        buttons[2].setText("Memory");
         buttons[3].setText("Battle");
-        buttons[4].setText("Memory");
+        buttons[4].setText("Button Split");
         frame.repaint();
     }
 
