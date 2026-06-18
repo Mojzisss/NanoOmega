@@ -26,17 +26,102 @@ public class Battle {
         JButton button;
         int hp;
         int size;
+        int targetX;
+        int targetY;
+
 
         public Enemy(JButton button, int size) {
             this.button = button;
             this.size = size;
             this.hp = Math.max(1, size / 20);
+            Timer timer = new Timer(16, e -> update());
+            timer.start();
+            Run();
         }
 
         public void updateText() {
+
             button.setText(String.valueOf(hp));
         }
+
+        private void update() {
+
+            int x = button.getX();
+            int y = button.getY();
+
+            int newX = x + (int)((targetX - x) * 0.15);
+            int newY = y + (int)((targetY - y) * 0.15);
+
+
+            if (!wouldCollide(newX, newY)) {
+                button.setLocation(newX, newY);
+            } else {
+                button.setLocation(x, y);
+            }
+        }
+
+        private boolean wouldCollide(int x, int y) {
+
+            Rectangle me = new Rectangle(x, y, size, size);
+
+            for (Enemy e : enemies) {
+
+                if (e == this) continue;
+
+                Rectangle other = new Rectangle(e.button.getX(), e.button.getY(), e.size, e.size);
+
+                if (me.intersects(other)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void Run() {
+
+            frame.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+
+                Random r = new Random();
+
+                @Override
+                public void mouseMoved(java.awt.event.MouseEvent e) {
+
+                    for (Enemy enemy : enemies) {
+
+                        Point mouse = e.getPoint();
+
+                        int bx = enemy.button.getX() + enemy.button.getWidth() / 2;
+                        int by = enemy.button.getY() + enemy.button.getHeight() / 2;
+
+                        int dx = mouse.x - bx;
+                        int dy = mouse.y - by;
+
+                        double dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 120) {
+
+                            int moveX = enemy.button.getX() - dx;
+                            int moveY = enemy.button.getY() - dy;
+
+                            moveX += r.nextInt(40) - 20;
+                            moveY += r.nextInt(40) - 20;
+
+                            int maxX = frame.getWidth() - enemy.button.getWidth();
+                            int maxY = frame.getHeight() - enemy.button.getHeight();
+
+                            moveX = Math.max(0, Math.min(maxX, moveX));
+                            moveY = Math.max(0, Math.min(maxY, moveY));
+
+                            enemy.targetX = moveX;
+                            enemy.targetY = moveY;
+                        }
+                    }
+                }
+            });
+        }
     }
+
 
     private void FirstEnemy() {
         startTime = System.currentTimeMillis();
@@ -49,6 +134,8 @@ public class Battle {
         Enemy enemy = new Enemy(btn, size);
         enemy.button.setBounds(x, y, size, size);
         enemy.updateText();
+        enemy.targetX = x;
+        enemy.targetY = y;
         enemy.button.addActionListener(e -> {
 
             enemy.hp--;
@@ -97,8 +184,15 @@ public class Battle {
             int maxX = frame.getWidth() - newSize - 50;
             int maxY = frame.getHeight() - newSize - 50;
 
-            int x = rd.nextInt(maxX) + 25;
-            int y = rd.nextInt(maxY) + 25;
+            int x;
+            int y;
+            int attempts = 0;
+
+            do {
+                x = rd.nextInt(maxX) + 25;
+                y = rd.nextInt(maxY) + 25;
+                attempts++;
+            } while (collides(x, y, size, null) && attempts < 50);
 
             createEnemy(x, y, newSize);
         }
@@ -108,6 +202,25 @@ public class Battle {
         frame.revalidate();
         frame.repaint();
     }
+
+    private boolean collides(int x, int y, int size, Enemy self) {
+
+        for (Enemy e : enemies) {
+
+            if (e == self) continue;
+
+            Rectangle r1 = new Rectangle(x, y, size, size);
+            Rectangle r2 = new Rectangle(e.button.getX(), e.button.getY(), e.size, e.size);
+
+            if (r1.intersects(r2)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
 
     private void checkWin() {
 
