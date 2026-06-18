@@ -8,21 +8,35 @@ public class Start {
 
     private JFrame frame;
     private JButton[] buttons;
+    private String playerName;
 
     public Start() {
 
         createWindow();
         createButtons();
         frame.setVisible(true);
+        playerName = JOptionPane.showInputDialog("type your name:");
+
+        if (playerName == null || playerName.isBlank()) {
+            playerName = "Unknown";
+        }
+
+        createWindow();
+        createButtons();
+
+        frame.setVisible(true);
+
     }
 
     private void createWindow() {
 
-        frame = new JFrame("My Project");
+        frame = new JFrame("Game Launcher 3000");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
+
 
     private void createButtons() {
 
@@ -65,7 +79,7 @@ public class Start {
                         break;
 
                     case 3:
-                        new Battle(frame);
+                        new Battle(frame, playerName);
                         break;
 
                     case 2:
@@ -89,6 +103,7 @@ public class Start {
 
             frame.add(buttons[i]);
         }
+
         buttons[0].setText("find Button");
         buttons[1].setText("clean screen");
         buttons[2].setText("Memory");
@@ -101,6 +116,10 @@ public class Start {
         for (int j = 0; j < buttons.length; j++) {
             buttons[j].setVisible(false);
         }
+    }
+
+    public String getPlayerName() {
+        return playerName;
     }
 }
 

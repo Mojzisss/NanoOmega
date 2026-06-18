@@ -13,10 +13,18 @@ public class Battle {
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private final int MIN_SIZE = 50;
     private long startTime;
+    private String playerName;
 
-    public Battle(JFrame frame) {
+
+    public Battle(JFrame frame, String playerName) {
 
         this.frame = frame;
+        this.playerName = playerName;
+        if (playerName == null || playerName.isBlank()) {
+            this.playerName = "Unknown";
+        } else {
+            this.playerName = playerName;
+        }
         FirstEnemy();
     }
 
@@ -177,10 +185,6 @@ public class Battle {
                 continue;
             }
 
-            if ((newSize<400)&(newSize<200)){
-
-            }
-
             int maxX = frame.getWidth() - newSize - 50;
             int maxY = frame.getHeight() - newSize - 50;
 
@@ -230,6 +234,7 @@ public class Battle {
 
             double seconds = duration / 1000.0;
 
+            Leaderboard.saveScore("Battle", playerName, seconds);
             JOptionPane.showMessageDialog(
                     frame,
                     "you won! \nin: "
